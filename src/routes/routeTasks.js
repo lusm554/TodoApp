@@ -39,10 +39,10 @@ router.delete('/delete/:id', (req, res) => {
 
 // change task
 router.put('/change/:id', (req, res) => {
-    const { title, task } = req.body;
+    const { title, task, done} = req.body;
     const { id } = req.params;
 
-    Task.updateOne({_id: id}, {title, task}, (err, doc) => {
+    Task.updateOne({_id: id}, {title, task, done}, (err, doc) => {
         if(err) {
             res.status(404).json({err})
             return console.log(err)
@@ -51,4 +51,5 @@ router.put('/change/:id', (req, res) => {
         res.json({status: 200})
     })
 })
+
 module.exports = router;
