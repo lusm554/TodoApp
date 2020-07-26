@@ -10,3 +10,12 @@ app.get('/', (req, res) => {
 const PORT = config.get('port')
 
 app.listen(PORT)
+
+/**
+ * 1. GET 
+ * get list of tasks
+ * 2. POST
+ * add task to list
+ * 3. DELETE
+ * delete task from list
+ */
