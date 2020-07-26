@@ -1,11 +1,12 @@
 const express = require('express');
 const config = require('config');
+const mongoose = require('mongoose')
+
+mongoose.connect(config.get('MongoId'), {useNewUrlParser: true, useUnifiedTopology: true});
 
 const app = express();
 
-app.get('/', (req, res) => {
-    res.json({name: 'Ya', age: 16})
-})
+app.use('/', require('./src/routes/routeTasks'))
 
 const PORT = config.get('port')
 
