@@ -8,7 +8,7 @@ mongoose.connect(config.get('MongoId'), {useNewUrlParser: true, useUnifiedTopolo
 const app = express();
 app.use(bodyParser.json())
 
-app.use('/', require('./src/routes/routeTasks'))
+app.use('/api', require('./src/routes/routeTasks'))
 
 const PORT = config.get('port')
 
