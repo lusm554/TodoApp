@@ -1,16 +1,32 @@
-const express = require('express');
-const config = require('config');
+const express = require('express')
+const config = require('config')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
+const cors = require('cors')
 
-mongoose.connect(config.get('MongoId'), {useNewUrlParser: true, useUnifiedTopology: true});
-
-const app = express();
-app.use(bodyParser.json())
-
-app.use('/api', require('./src/routes/routeTasks'))
-
-
+const app = express()
 const PORT = config.get('port')
+
+mongoose.connect(config.get('MongoId'), {useNewUrlParser: true, useUnifiedTopology: true}).catch(
+    (err) => {
+        throw err;
+    }
+)
+
+let whiteList = ['http://localhost:3000']
+let corsOptions = {
+    origin(origin, callback) {
+        if (whiteList.includes(origin) || !origin) {
+            callback(null, true)
+        }
+        else {
+            callback(new Error('Not allowed by CORS'))
+        }
+    }
+}
+
+app.use(cors(corsOptions))
+
+app.use('/api', bodyParser.json(), require('./src/routes/routeTasks'))
 
 app.listen(PORT)

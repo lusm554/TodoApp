@@ -4,7 +4,11 @@ const Task = require('../models/modelTask')
 
 // get list of tasks
 router.get('/tasks', (req, res) => {
-    Task.find().then((...a) => res.json(a[0]))
+    try {
+        Task.find().then((...a) => res.json(a[0]))
+    } catch (err) {
+        res.status(404).json({err})
+    }
 })
 
 // create new task
