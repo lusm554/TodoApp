@@ -19,6 +19,17 @@ router.post('/newTask', (req, res) => {
     })
 })
 
+router.delete('/delete/:id', (req, res) => {
+    const id = req.params.id
 
+    Task.deleteOne({_id: id}, (err) => {
+        if(err) {
+            res.status(404).json({err: err});
+            return console.error(err)
+        }
+
+        res.json({status: 200})
+    })
+})
 
 module.exports = router;
