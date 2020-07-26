@@ -8,8 +8,7 @@ router.get('/tasks', (req, res) => {
 })
 
 router.post('/newTask', (req, res) => {
-    const {title, task} = req.query;
-    console.log(req.query)
+    console.log(req.body)
 
     // new Task()
 })
