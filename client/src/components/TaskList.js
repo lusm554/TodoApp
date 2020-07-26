@@ -4,6 +4,8 @@ class TaskList extends Component {
     constructor(props) {
         super(props)
         this.state = {tasks: []}
+
+        this.handleToggleChange = this.handleToggleChange.bind(this)
     }
 
     componentDidMount() {
@@ -12,6 +14,12 @@ class TaskList extends Component {
             .then(tasks => {
                 this.setState({tasks: tasks });
             })
+    }
+
+    handleToggleChange(e) {
+        let checked = e.target.checked
+
+        e.target.checked = !checked;
     }
 
     render() {
@@ -23,7 +31,11 @@ class TaskList extends Component {
                     return <li key={_id}>
                         <h1>{title}</h1>
                         <p>{task}</p>
-                        <input type="checkbox" checked={true}/>
+                        <input 
+                          type="checkbox" 
+                          checked={done} 
+                          onChange={this.handleToggleChange}
+                        />
                     </li>
                 })}
             </ul>
