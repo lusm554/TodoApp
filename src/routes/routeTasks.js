@@ -19,6 +19,7 @@ router.post('/newTask', (req, res) => {
     })
 })
 
+// delete task
 router.delete('/delete/:id', (req, res) => {
     const id = req.params.id
 
@@ -32,4 +33,18 @@ router.delete('/delete/:id', (req, res) => {
     })
 })
 
+// change task
+router.put('/change/:id', (req, res) => {
+    const { title, task } = req.body;
+    const { id } = req.params;
+
+    Task.updateOne({_id: id}, {title, task}, (err, doc) => {
+        if(err) {
+            res.status(404).json({err})
+            return console.log(err)
+        }
+
+        res.json({status: 200})
+    })
+})
 module.exports = router;
