@@ -6,12 +6,9 @@ class App extends Component {
         super(props)
         this.state = {title: '', task: ''}
         this.handleSubmit = this.handleSubmit.bind(this)
-        this.a = this.a.bind(this)
+        this.taskListRef = React.createRef()
     }
 
-    a() {
-        this.setState({title: '', task: ''})
-    }
 
     handleSubmit(e) {
         e.preventDefault()
@@ -22,12 +19,7 @@ class App extends Component {
             },
             body: JSON.stringify(this.state)
         })  
-            .then(res => {
-                if(res.status === 200) {
-                    this.a()
-                }
-                return;
-            })
+            .then(this.taskListRef.current.getTasks)
     }
 
     render() {
@@ -51,7 +43,7 @@ class App extends Component {
                         />
                     </label>
                 </form>
-                <TaskList />
+                <TaskList ref={this.taskListRef}/>
             </div>
         )
     }
