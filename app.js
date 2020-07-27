@@ -3,7 +3,6 @@ const config = require('config')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const cors = require('cors')
-// const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const app = express()
 const PORT = config.get('port')
