@@ -13,7 +13,7 @@ mongoose.connect(config.get('MongoId'), {useNewUrlParser: true, useUnifiedTopolo
     }
 )
 
-let whiteList = ['http://localhost:3000']
+let whiteList = ['http://localhost:4000']
 let corsOptions = {
     origin(origin, callback) {
         if (whiteList.includes(origin) || !origin) {
