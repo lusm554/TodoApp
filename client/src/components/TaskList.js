@@ -9,10 +9,10 @@ class TaskList extends Component {
     }
 
     componentDidMount() {
-        fetch('http://localhost:4000/api/tasks')
+        fetch('/api/tasks')
             .then(res => res.json())
             .then(tasks => {
-                this.setState({tasks: tasks });
+                this.setState({tasks: tasks })
             })
     }
 
