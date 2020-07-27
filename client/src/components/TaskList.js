@@ -17,9 +17,11 @@ class TaskList extends Component {
     }
 
     handleToggleChange(e) {
-        let checked = e.target.checked
+        // this.setState({tasks: this.statet.tasks})
 
-        e.target.checked = !checked;
+        console.log(e.done)
+
+        // fetch(`change/`)
     }
 
     render() {
@@ -34,7 +36,7 @@ class TaskList extends Component {
                         <input 
                           type="checkbox" 
                           checked={done} 
-                          onChange={this.handleToggleChange}
+                          onChange={() => this.handleToggleChange({done, _id})}
                         />
                     </li>
                 })}

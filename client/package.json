@@ -1,5 +1,8 @@
 {
-  "proxy": "http://localhost:4000/",
+  "proxy": {
+    "target": "http://localhost:4000/",
+    "secure": false
+  },
   "name": "client",
   "version": "0.1.0",
   "private": true,
