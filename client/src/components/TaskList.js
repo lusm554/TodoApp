@@ -7,6 +7,7 @@ class TaskList extends Component {
 
         this.handleToggleChange = this.handleToggleChange.bind(this)
         this.getTasks = this.getTasks.bind(this)
+        this.handleClickDelete = this.handleClickDelete.bind(this)
     }
 
     componentDidMount() {
@@ -32,6 +33,13 @@ class TaskList extends Component {
             .then(this.getTasks)
     }
 
+    handleClickDelete({_id}) {
+        fetch(`/api/delete/${_id}`, {
+            method: 'DELETE'
+        })
+            .then(this.getTasks)
+    }
+
     render() {
         const { tasks } = this.state
 
@@ -45,6 +53,11 @@ class TaskList extends Component {
                           type="checkbox" 
                           checked={done} 
                           onChange={() => this.handleToggleChange({done, _id})}
+                        />
+                        <input 
+                          type="button"
+                          value="delete"
+                          onClick={() => this.handleClickDelete({_id})}
                         />
                     </li>
                 })}
