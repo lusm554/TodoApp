@@ -6,13 +6,18 @@ class TaskList extends Component {
         this.state = {tasks: []}
 
         this.handleToggleChange = this.handleToggleChange.bind(this)
+        this.getTasks = this.getTasks.bind(this)
     }
 
     componentDidMount() {
+        this.getTasks()
+    }
+
+    getTasks() {
         fetch('/api/tasks')
             .then(res => res.json())
             .then(tasks => {
-                this.setState({tasks: tasks })
+                this.setState({tasks: tasks})
             })
     }
 
@@ -22,9 +27,9 @@ class TaskList extends Component {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({"done": !done, _id})
+            body: JSON.stringify({"done": !done})
         })
-            .then(this.setState({tasks: this.state.tasks}))
+            .then(this.getTasks)
     }
 
     render() {
@@ -47,5 +52,6 @@ class TaskList extends Component {
         )
     }
 }
+
 
 export default TaskList;
