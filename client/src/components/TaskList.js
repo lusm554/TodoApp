@@ -17,15 +17,14 @@ class TaskList extends Component {
     }
 
     handleToggleChange({done, _id}) {
-        console.log(done, !done)   
-
         fetch(`/api/change/${_id}`, {
             method: 'PUT',
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({_id, done: !done})
-        }).then(this.setState({tasks: this.state.tasks}))
+            body: JSON.stringify({"done": !done, _id})
+        })
+            .then(this.setState({tasks: this.state.tasks}))
     }
 
     render() {

@@ -42,15 +42,17 @@ router.put('/change/:id', (req, res) => {
     const { title, task, done} = req.body;
 
     const { id } = req.params;
-    const changedTask = JSON.stringify({title, task, done})
 
-    Task.updateOne({_id: id}, changedTask, (err, doc) => {
+    // exclude values that are undefined
+    const a = JSON.stringify({title, task, done})
+
+    Task.updateOne({_id: id}, JSON.parse(a), (err, doc) => {
         if(err) {
             res.status(404).json({err})
             return console.log(err)
         }
 
-        res.json({status: 200})
+        res.json({status: 200, doc})
     })
 })
 
