@@ -4,12 +4,53 @@ import TaskList from './components/TaskList';
 class App extends Component {
     constructor(props) {
         super(props)
-        this.state = {}
+        this.state = {title: '', task: ''}
+        this.handleSubmit = this.handleSubmit.bind(this)
+        this.a = this.a.bind(this)
+    }
+
+    a() {
+        this.setState({title: '', task: ''})
+    }
+
+    handleSubmit(e) {
+        e.preventDefault()
+        fetch('/api/newTask/', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(this.state)
+        })  
+            .then(res => {
+                if(res.status === 200) {
+                    this.a()
+                }
+                return;
+            })
     }
 
     render() {
         return (
             <div>
+                <form onSubmit={this.handleSubmit}>
+                    <label>
+                        New task:<br/>
+                        <input 
+                          type="text"
+                          value={this.state.title}
+                          onChange={(e) => this.setState({title: e.target.value})}
+                        /><br/>
+                        <textarea
+                          value={this.state.task}
+                          onChange={(e) => this.setState({task: e.target.value})}
+                        /><br/>
+                        <input 
+                          type="submit"
+                          value="add"
+                        />
+                    </label>
+                </form>
                 <TaskList />
             </div>
         )
