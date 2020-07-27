@@ -3,6 +3,7 @@ const config = require('config')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const cors = require('cors')
+// const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const app = express()
 const PORT = config.get('port')
@@ -29,4 +30,4 @@ app.use(cors(corsOptions))
 
 app.use('/api', bodyParser.json(), require('./src/routes/routeTasks'))
 
-app.listen(PORT)
+app.listen(PORT || 4001)
