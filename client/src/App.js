@@ -34,11 +34,13 @@ class App extends Component {
                           type="text"
                           value={this.state.title}
                           onChange={(e) => this.setState({title: e.target.value})}
+                          placeholder="this is title?"
                           className="title"
                         /><br/>
                         <textarea
                           value={this.state.task}
                           onChange={(e) => this.setState({task: e.target.value})}
+                          placeholder="task here..."
                           className="task"
                         /><br/>
                         <input 

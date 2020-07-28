@@ -7,3 +7,9 @@ body {
 .title {
     margin: 5px;
 }
+
+.task {
+    margin: 0px;
+    width: 246px;
+    height: 65px;
+}
