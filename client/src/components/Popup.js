@@ -27,7 +27,8 @@ class Popup extends Component {
                             />
                         </label>
                     </form>
-                    <button onClick={() => this.props.closePopup({title, task})}>Close window</button>
+                    <button onClick={() => this.props.closePopup({title, task})}>Submit</button>
+                    <button onClick={() => this.props.togglePopup()}>Close</button>
                 </div>
             </div>
         )
