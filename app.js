@@ -3,6 +3,7 @@ const config = require('config')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const cors = require('cors')
+const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const app = express()
 const PORT = config.get('port')
@@ -25,8 +26,16 @@ let corsOptions = {
     }
 }
 
+const proxyOptions = {
+    target: 'http://localhost:3000', // target host
+    changeOrigin: true, // needed for virtual hosted sites
+    ws: true, // proxy websockets
+};
+
+const Proxy = createProxyMiddleware(proxyOptions);
+
 app.use(cors(corsOptions))
 
-app.use('/api', bodyParser.json(), require('./src/routes/routeTasks'))
+app.use('/api', bodyParser.json(), Proxy, require('./src/routes/routeTasks'))
 
 app.listen(PORT || 4001)
