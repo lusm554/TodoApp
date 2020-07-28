@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import TaskList from './components/TaskList';
+import './index.css';
 
 class App extends Component {
     constructor(props) {
@@ -25,18 +26,20 @@ class App extends Component {
 
     render() {
         return (
-            <div>
-                <form onSubmit={this.handleSubmit}>
+            <div className="main">
+                <form onSubmit={this.handleSubmit} className="form">
                     <label>
-                        New task:<br/>
+                        <h1>New task:</h1><br/>
                         <input 
                           type="text"
                           value={this.state.title}
                           onChange={(e) => this.setState({title: e.target.value})}
+                          className="title"
                         /><br/>
                         <textarea
                           value={this.state.task}
                           onChange={(e) => this.setState({task: e.target.value})}
+                          className="task"
                         /><br/>
                         <input 
                           type="submit"
@@ -44,7 +47,7 @@ class App extends Component {
                         />
                     </label>
                 </form>
-                <TaskList ref={this.taskListRef}/>
+                <TaskList ref={this.taskListRef} className="taskList"/>
             </div>
         )
     }

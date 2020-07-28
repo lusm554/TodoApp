@@ -68,7 +68,7 @@ class TaskList extends Component {
         return (
             <ul>
                 {tasks.map(( {title, _id, task, done} ) => {
-                    return <li key={_id}>
+                    return <li key={_id} style={{margin: '10px'}}>
                         <h1>{title}</h1>
                         <p>{task}</p>
                         <input 
@@ -80,6 +80,7 @@ class TaskList extends Component {
                           type="button"
                           value="delete"
                           onClick={() => this.handleClickDelete({_id})}
+                          style={{margin: '5px'}}
                         />
                         <input 
                           type="button"
