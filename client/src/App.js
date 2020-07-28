@@ -20,6 +20,7 @@ class App extends Component {
             body: JSON.stringify(this.state)
         })  
             .then(this.taskListRef.current.getTasks)
+            .then(this.setState({title: '', task: ''}))
     }
 
     render() {

@@ -85,7 +85,7 @@ class TaskList extends Component {
                           onClick={this.togglePopup}
                         />
                         {this.state.showPopup && 
-                          <Popup text="close" closePopup={this.handleChangeTask.bind(this, {_id})}/> }
+                          <Popup text="close" closePopup={this.handleChangeTask.bind(this, {_id})} togglePopup={this.togglePopup}/> }
                     </li>
                 })}
             </ul>
