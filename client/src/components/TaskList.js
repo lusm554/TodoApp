@@ -4,7 +4,7 @@ import Popup from './Popup';
 class TaskList extends Component {
     constructor(props) {
         super(props)
-        this.state = {tasks: [], showPopup: false}
+        this.state = {tasks: [], showPopup: false, currentId: ''}
 
         this.handleToggleChange = this.handleToggleChange.bind(this)
         this.getTasks = this.getTasks.bind(this)
@@ -42,22 +42,24 @@ class TaskList extends Component {
             .then(this.getTasks)
     }
 
-    handleChangeTask({_id}, {title, task}) {
-        fetch(`/api/change/${_id}`, {
+    handleChangeTask({title, task}) {
+        fetch(`/api/change/${this.state.currentId}`, {
             method: 'PUT',
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({title, task})
         })
-            .then(res => {
-                console.log(res);
+            .then(() => {
                 this.setState(({showPopup}) => ({showPopup: !showPopup}))
             })
+            .then(this.getTasks)
     }
 
-    togglePopup() {
-        this.setState(({showPopup}) => ({showPopup: !showPopup}))
+    togglePopup(e) {
+        let id = e.target.id
+
+        this.setState(({showPopup}) => ({showPopup: !showPopup, currentId: id}))
     }
 
     render() {
@@ -82,10 +84,15 @@ class TaskList extends Component {
                         <input 
                           type="button"
                           value="change"
+                          id={_id}
                           onClick={this.togglePopup}
                         />
                         {this.state.showPopup && 
-                          <Popup text="close" closePopup={this.handleChangeTask.bind(this, {_id})} togglePopup={this.togglePopup}/> }
+                          <Popup 
+                          text="close" 
+                          handleChangeTask={this.handleChangeTask.bind(this)} 
+                          togglePopup={() => this.setState(state => ({showPopup: !state.showPopup}))}
+                        />}
                     </li>
                 })}
             </ul>
