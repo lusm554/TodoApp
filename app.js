@@ -3,6 +3,7 @@ const config = require('config')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const cors = require('cors')
+const path = require('path')
 // const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const app = express()
@@ -14,28 +15,25 @@ mongoose.connect(config.get('MongoId'), {useNewUrlParser: true, useUnifiedTopolo
     }
 )
 
-let whiteList = ['http://127.0.0.1:4001/']
-let corsOptions = {
-    origin(origin, callback) {
-        if (whiteList.includes(origin) || !origin) {
-            callback(null, true)
-        }
-        else {
-            callback(new Error('Not allowed by CORS'))
-        }
-    }
-}
+// let whiteList = ['http://127.0.0.1:4001/', 'http://127.0.0.1:3000/']
+// let corsOptions = {
+//     origin(origin, callback) {
+//         if (whiteList.includes(origin) || !origin) {
+//             callback(null, true)
+//         }
+//         else {
+//             callback(new Error('Not allowed by CORS'))
+//         }
+//     }
+// }
 
-// const proxyOptions = {
-//     target: 'http://127.0.0.1:4001/', // target host
-//     changeOrigin: true, // needed for virtual hosted sites
-//     ws: true, // proxy websockets
-// };
-
-// const Proxy = createProxyMiddleware(proxyOptions);
-
-app.use(cors(corsOptions))
+app.use(cors())
 
 app.use('/api', bodyParser.json(), require('./src/routes/routeTasks'))
+
+app.use(express.static(path.join(__dirname, 'client/build')));
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+});
 
 app.listen(PORT || 4001)
