@@ -36,4 +36,6 @@ app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
 
-app.listen(PORT || 4001)
+app.listen(PORT || 3000, () => {
+    console.log(`http://localhost:${PORT || 3000}`)
+})

@@ -10,7 +10,7 @@ Use the git clone to install Todo app.
 
 ## Usage
 In the root allication run ` npm i `<br/>
-Then `cd client && npm i `
+then `cd client && npm i` <br/>and then `npm run build && npm run server`
 
 ## Contributing
 Pull requests are welcome.
